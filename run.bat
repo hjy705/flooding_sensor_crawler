@@ -1,0 +1,1 @@
+cd C:\Users\User\Desktop\flooding_sensor_crawler && .\venv\Scripts\activate && python run.py

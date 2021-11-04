@@ -1,9 +1,17 @@
 import json, psycopg2, os
 from datetime import datetime
+
+from requests.models import to_native_string
 import api
+import notify
+
+with open('db.json','r', encoding = 'utf-8') as f:
+    db = json.load(f)
+with open('notify_target.json','r', encoding = 'utf-8') as f:
+    target = json.load(f)
 
 now_time = datetime.now()
-
+notifyActionType = "testing"
 log_result = {
     "time": "",
     "status": ""
@@ -27,11 +35,17 @@ try:
         
 
     # 取淹水感知器資料
-    data = api.request_data(token_use)
+    rawData = api.request_data(token_use)
+    data = []
+    for value in rawData:
+        stationid = value["StationId"]
+        if stationid in target:
+            data.append(value)
+        else:
+            pass   
+    notify.notify_send(data, db["line_token"], notifyActionType)
 
     # 資料庫連線
-    with open('db.json','r', encoding = 'utf-8') as f:
-        db = json.load(f)
     conn = psycopg2.connect(database=db["database"], user=db["user"] , password=db["password"], host=db["host"], port=db["port"])
     cur = conn.cursor()
 
@@ -60,6 +74,8 @@ try:
                 sql_string += "INSERT INTO public.flood_sensor_level (stationid, time, level) VALUES ('{a}','{b}',{c});".format(a= stationid, b=timevalue, c=str(levelvalue))          
             else:
                 pass
+    else:
+        pass
 
     # 執行insert
     if len(sql_string) > 0:
@@ -70,22 +86,11 @@ try:
     conn.close()
 
     log_result["status"] = "執行成功"
+    log_result["time"] = str(now_time)
 except:
     log_result["status"] = "執行失敗"
+    log_result["time"] = str(now_time)
 
 with open ('log_result.json', 'w', encoding='utf-8') as outfile:
     json.dump(log_result, outfile, ensure_ascii=False, indent=4 )
 
-
-# log_result = {
-#     "time": "",
-#     "status": ""
-# }
-
-# try:
-#     
-#     log_result["status"] = "執行成功"
-# except:
-#     log_result["status"] = "執行失敗"
-
-# with open log_result
