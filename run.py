@@ -1,9 +1,6 @@
-import json, psycopg2, os
+import json, psycopg2, os, api, notify
 from datetime import datetime
 
-from requests.models import to_native_string
-import api
-import notify
 
 with open('db.json','r', encoding = 'utf-8') as f:
     db = json.load(f)

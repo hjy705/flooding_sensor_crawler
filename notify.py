@@ -1,10 +1,6 @@
-import api,random,requests,json
+import random,requests
 from datetime import datetime
 
-
-# data = api.request_data("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InRoaW5rdHJvbnNlY3Rpb24xIiwicm9sZSI6IlVzZXIiLCJuYmYiOjE2MzUzMTc5MzQsImV4cCI6MTYzNTMxOTczNCwiaWF0IjoxNjM1MzE3OTM0LCJpc3MiOiJIeWRyb2xvZ3kuT0F1dGgyIiwiYXVkIjoiSHlkcm9sb2d5Lk9wZW5EYXRhQXBpIn0.PDnInB-8TDl0hWUgIsIfKgq7R2txC22IRwAAueZ7qk4")
-# with open('db.json','r', encoding = 'utf-8') as f:
-#     db = json.load(f)
 
 def notify_send(data, token, type):    
     result = {
@@ -41,5 +37,3 @@ def notify_send(data, token, type):
 
         payload = {'message': message}
         r = requests.post("https://notify-api.line.me/api/notify", headers = headers, params = payload)
-
-# notify_send(data, "123")
