@@ -15,6 +15,7 @@
 ## **檔案說明**
 <br>run.py 為撰寫之主要程式
 <br>token.json 透過Postman取得的token
+<br>notify.py 撰寫Line notify訊息
 <br>notify_target.json 目標測站 
 <br>log_result.json 顯示專案結果是否執行
 <br>db.json 存放涉及隱私相關的資料；db_template.json為db.json的空模板
@@ -24,6 +25,9 @@
 </br>
 
 ## **成果說明**
+<br>在PostgreSQL本地端資料庫匯入api取得的最新資料
+
+![PostgreSQL更新資料](./images/postgreSQL.jpg)
 <br>以Postman程式顯示提出請求獲取token
 
 ![Postman獲取token](./images/Postman獲取token.jpg)
@@ -32,4 +36,4 @@
 ![Postman獲取資料](./images/Postman獲取資料.jpg)
 
 篩選後所取得的資料使用Line Notify功能，定時推播達到示警的測站資訊
-![Postman獲取資料](./images/linenotify.jpg)
+![linenotifymessage]](./images/linenotify.jpg)
