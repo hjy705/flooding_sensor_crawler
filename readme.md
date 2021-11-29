@@ -36,4 +36,4 @@
 ![Postman獲取資料](./images/Postman獲取資料.jpg)
 
 篩選後所取得的資料使用Line Notify功能，定時推播達到示警的測站資訊
-![linenotifymessage]](./images/linenotify.jpg)
+![linenotifymessage](./images/linenotify.jpg)
